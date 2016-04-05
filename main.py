@@ -11,7 +11,7 @@ from ProxyIP import ProxyIp
 class Run_it(object):
     page = Get_pages()
     co = Get_content()
-    MyProxy = ProxyIp("557143317730218")    #指定从此订单号内获取代理ip
+    MyProxy = ProxyIp("2016040562884")    #指定从此订单号内获取代理ip
 
     def get_ip(self):  #  抓ip的脚本
         header = {
