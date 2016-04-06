@@ -90,10 +90,10 @@ if __name__ == '__main__':
     test_it = Run_it()
 
     print("参数:")
-    print(str(sys.argv[0])+"~"+str(sys.argv[1]))
+    print(str(sys.argv[1])+"~"+str(sys.argv[2]))
 
-    startPage = sys.argv[0]
-    endPage = sys.argv[1]
+    startPage = sys.argv[1]
+    endPage = sys.argv[2]
     test_it.run(int(startPage),int(endPage))
 
 
