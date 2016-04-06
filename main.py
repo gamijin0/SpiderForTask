@@ -11,7 +11,7 @@ from ProxyIP import ProxyIp
 class Run_it(object):
     page = Get_pages()
     co = Get_content()
-    MyProxy = ProxyIp("2016040562884")    #指定从此订单号内获取代理ip
+    MyProxy = ProxyIp("2016040663842")    #指定从此订单号内获取代理ip
 
     def get_ip(self):  #  抓ip的脚本
         header = {
@@ -32,14 +32,6 @@ class Run_it(object):
             ips.append(ip)
         return ips
 
-    # def read_txt(self):
-    #     ips = []
-    #     with open('1.txt') as f:
-    #         lines = f.readlines()
-    #         for line in lines:
-    #             ip = line.replace('\n','')
-    #             ips.append(ip)
-    #     return ips
 
     def write_file(self,name,data):
         file_name = name

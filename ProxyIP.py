@@ -22,5 +22,5 @@ class ProxyIp :
         return self.IP_list
 
 if __name__=="__main__":
-    mproxy = ProxyIp("2016040562884")
+    mproxy = ProxyIp("2016040663842")
     print(mproxy.GetIP(10))
