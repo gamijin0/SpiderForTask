@@ -45,6 +45,10 @@ class Run_it(object):
     def run(self,startPage,endPage):
         start = startPage*10
         ips = self.MyProxy.GetIP(30) #每次获取100个ip
+
+        while(len(ips)<3):
+            ips = self.MyProxy.GetIP(30)
+
         # print(ips)
         ip = ips[0]
         proxies = {
