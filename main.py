@@ -3,6 +3,7 @@
 
 import csv
 import sys
+import os
 import requests
 from bs4 import BeautifulSoup
 from zhuanli import Get_pages
@@ -81,7 +82,13 @@ class Run_it(object):
                     except:
                         data = []
                         break
-            filename = "专利"+str(startPage)+"_"+str(endPage)+".csv"
+
+            if(int(start/10)>startPage):
+                filename_last = "专利"+str(startPage)+"_"+str(int(start/10)-1)+".csv"
+            else:
+                filename_last = "专利"+str(startPage)+"_"+str(int(start/10))+".csv"
+            filename = "专利"+str(startPage)+"_"+str(int(start/10))+".csv"
+            os.rename(filename_last,filename)
             self.write_file(filename,data)
             print(int(start/10)+1,'页写入文件！')
             start += 10

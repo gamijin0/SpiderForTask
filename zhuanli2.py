@@ -11,7 +11,7 @@ class  Get_content(object):
 
     def get_content(self,html):
         result = []
-        soup = BeautifulSoup(html)
+        soup = BeautifulSoup(html,"html.parser")
         for i in range(0,10):
             temp = []
             id = "sameApDiv" + str(i)
