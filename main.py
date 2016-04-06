@@ -2,6 +2,7 @@
 # coding: utf-8
 
 import csv
+import sys
 import requests
 from bs4 import BeautifulSoup
 from zhuanli import Get_pages
@@ -87,8 +88,12 @@ class Run_it(object):
         print('抓取结束！')
 if __name__ == '__main__':
     test_it = Run_it()
-    startPage = input("开始页数:")
-    endPage = input("结束页数:")
+
+    print("参数:")
+    print(sys.argv)
+
+    startPage = sys.argv[0]
+    endPage = sys.argv[1]
     test_it.run(int(startPage),int(endPage))
 
 
