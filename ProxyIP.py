@@ -11,16 +11,20 @@ class ProxyIp :
     def __init__(self,tid):
         self.tid = tid
     def GetIP(self,num):
-        # getzh=2016040499814
         suffix = "getzh="+str(self.tid)
         suffix += "&getnum="+str(num)
         suffix +="isp=0&anonymoustype=0&start=&ports=&export=&ipaddress=&area=0&proxytype=2&api=https"
 
         Total_url = self.API_url+suffix
-        res = requests.get(Total_url)
-        self.IP_list = res.text.replace('\t','').replace('\n','').replace(' ','').replace('\r','').split('<br>')
-        return self.IP_list
+        try:
+            res = requests.get(Total_url)
+            temp = res.text.replace('\t','').replace('\n','').replace(' ','').replace('\r','').split('<br>')
+            if(len(temp)>=5):
+                self.IP_list = res.text.replace('\t','').replace('\n','').replace(' ','').replace('\r','').split('<br>')
+            return self.IP_list
+        except:
+            return self.IP_list
 
 if __name__=="__main__":
-    mproxy = ProxyIp("2016040663842")
+    mproxy = ProxyIp("2016040652293")
     print(mproxy.GetIP(10))
