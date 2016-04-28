@@ -35,11 +35,11 @@ def get_html(company):
     data={
         'softcopy':company#company.encode('gb2312')???
     }
-    byhtml=requests.post(url=url,headers=header,data=data).content
-    strhtml=byhtml.decode('utf-8')
-    #print(strhtml)
+    byhtml=requests.post(url=url,headers=header,data=data)
 
-    return strhtml
+    #print(strhtml)
+    print(byhtml.text)
+    return byhtml.text
 
 def get_patent(html):
     bs=BeautifulSoup(html,'html.parser')
