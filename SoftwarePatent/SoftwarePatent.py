@@ -37,7 +37,6 @@ def get_ResultList(company):
 
     return result_list
 
-
 # def get_patent(html):
 #     bs=BeautifulSoup(html.text,'html.parser')
 #     result_list=[]
