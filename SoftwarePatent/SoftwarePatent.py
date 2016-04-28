@@ -49,10 +49,10 @@ def get_ResultList(company):
 #     return result_list
 
 def read_csv(name):
-    reader = csv.reader(open(name, 'r'))
+    reader = csv.reader(open(name, 'rb')) #二进制读取
     company_list=[]
     for line in reader:
-        company_list.append(line)
+        company_list.append(line.decode('utf-8'))
 
     return company_list
 
