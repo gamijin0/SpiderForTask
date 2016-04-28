@@ -1,5 +1,5 @@
 __author__ = 'RealmL'
-# encoding = UTF-8
+# coding = UTF-8
 
 import csv
 import requests
