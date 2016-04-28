@@ -35,12 +35,14 @@ def get_html(company):
     data={
         'softcopy':company#company.encode('gb2312')???
     }
-    html=requests.post(url=url,header=header,data=data)
+    byhtml=requests.post(url=url,headers=header,data=data).content
+    strhtml=byhtml.decode('utf-8')
+    #print(strhtml)
 
-    return html
+    return strhtml
 
 def get_patent(html):
-    bs=BeautifulSoup(html.text,'html.parser')
+    bs=BeautifulSoup(html,'html.parser')
     result_list=[]
     for tr in bs.find('form',{'method':'post','id':'form1'}).find('tbody').find_all('tr'):
         sub_list=[]
@@ -58,7 +60,7 @@ def get_patent(html):
 #         f_csv.writerows(data)
 
 
-if __name__ == 'main':
+if __name__ == '__main__':
     html=get_html('百度')#虽然不用搜百度，主要是我随便试了几个他给的公司，都没有证书，有的不多
     #print(html.text)
     result_list=get_patent(html)
