@@ -37,6 +37,7 @@ def get_ResultList(company):
 
     return result_list
 
+
 # def get_patent(html):
 #     bs=BeautifulSoup(html.text,'html.parser')
 #     result_list=[]
@@ -48,25 +49,25 @@ def get_ResultList(company):
 #     return result_list
 
 def read_csv(name):
-    reader = csv.reader(open(name, 'rb')) #二进制读取
-    company_list=[]
-    for line in reader:
-        company_list.append(line.encode('utf-8'))
+        reader = csv.reader(open(name,'r',encoding='utf-8'))
+        company_list=[]
+        for line in reader:
+            company_list.append(line[0])
+        return company_list
 
-    return company_list
-
-# def write_csv(data,name):
-#     file_name = name
-#     with open(file_name, 'a', errors='ignore', newline='') as f:
-#         f_csv = csv.writer(f)
-#         f_csv.writerows(data)
+def write_csv(data,name):
+    file_name = name
+    with open(file_name, 'a', errors='ignore', newline='') as f:
+        f_csv = csv.writer(f)
+        f_csv.writerows(data)
 
 
 if __name__ =="__main__":
     company_list=read_csv('li.csv')
-    print(company_list)
-    # for company in company_list:
-    #     result_list=get_ResultList(company)
-    #     #print(result_list)
-    #     write_csv(result_list,'res.csv')
+    #print(company_list)
+    for company in company_list[1:]:
+        result_list=get_ResultList(company)
+        # result_list.insert(0,company)
+        # print(result_list[0:10])
+        write_csv(result_list,'res.csv')
 
