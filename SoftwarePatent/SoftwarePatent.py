@@ -64,9 +64,9 @@ def write_csv(data,name):
 if __name__ =="__main__":
     company_list=read_csv('li2.csv')
     #print(company_list)
-    Suffix = [['登记号','分类号','软件名称','版本号','著作权人','批准日期','所属企业','公司名字']]
-
+    Suffix = [['登记号','分类号','软件名称','版本号','著作权人','批准日期','所属企业','公司名字']] #文件头
     write_csv(Suffix, 'res.csv')
+
     for company in company_list[120:]:
         try:
             result_list=get_ResultList(company)
