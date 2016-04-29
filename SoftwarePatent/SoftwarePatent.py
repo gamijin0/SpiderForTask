@@ -27,14 +27,19 @@ def get_ResultList(company):
     for i in res:
         if i['SoftID']!='0':
             sub_list=[]
-            sub_list.append(company)
-            for value in i.values():
+
+            #for value in i.values():
                 #print(value)
-                sub_list.append(value)
-
-
-            result_list.append(sub_list)
+            sub_list.append(i['SoftID'])
+            sub_list.append(i['TypeNum'])
+            sub_list.append(i['SoftName'])
+            sub_list.append(i['Verson'])
+            sub_list.append(i['SoftAuthor'])
+            sub_list.append(i['SuessDate'])
+            sub_list.append(company)
             print(sub_list)
+            result_list.append(sub_list)
+
         else:
             print(company+" 无数据.")
 
