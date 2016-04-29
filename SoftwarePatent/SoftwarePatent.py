@@ -68,7 +68,10 @@ if __name__ =="__main__":
 
     write_csv(Suffix, 'res.csv')
     for company in company_list[120:]:
-        result_list=get_ResultList(company)
+        try:
+            result_list=get_ResultList(company)
+        except:
+            print("程序出现异常.")
         # result_list.insert(0,company)
         # print(result_list[0:10])
         write_csv(result_list,'res.csv')
