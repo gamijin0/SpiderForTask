@@ -25,35 +25,29 @@ def get_ResultList(company):
     #print(res)
     result_list=[]
     for i in res:
-        #print(i)
-        if i==None:
-            result_list.append('没有找到相关的证书资料')
-        else:
+        if i['SoftID']!='0':
             sub_list=[]
+            sub_list.append(company)
             for value in i.values():
                 #print(value)
                 sub_list.append(value)
+
+
             result_list.append(sub_list)
+            print(sub_list)
+        else:
+            print(company+" 无数据.")
 
     return result_list
 
 
-# def get_patent(html):
-#     bs=BeautifulSoup(html.text,'html.parser')
-#     result_list=[]
-#     for tr in bs.find('form',{'method':'post','id':'form1'}).find('div',{'id':'list'}).find('tbody').find_all('tr'):
-#         sub_list=[]
-#         for td in tr.find_all('td'):
-#             sub_list.append(td.string)
-#         sub_list.append(sub_list)
-#     return result_list
 
 def read_csv(name):
         reader = csv.reader(open(name,'r',encoding='utf-8'))
         company_list=[]
         for line in reader:
             company_list.append(line[0])
-        return company_list
+        return company_list[1:]
 
 def write_csv(data,name):
     file_name = name
@@ -63,9 +57,9 @@ def write_csv(data,name):
 
 
 if __name__ =="__main__":
-    company_list=read_csv('li.csv')
+    company_list=read_csv('li2.csv')
     #print(company_list)
-    for company in company_list[1:]:
+    for company in company_list:
         result_list=get_ResultList(company)
         # result_list.insert(0,company)
         # print(result_list[0:10])
