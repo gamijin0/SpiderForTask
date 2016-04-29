@@ -64,7 +64,10 @@ def write_csv(data,name):
 if __name__ =="__main__":
     company_list=read_csv('li2.csv')
     #print(company_list)
-    for company in company_list:
+    Suffix = [['登记号','分类号','软件名称','版本号','著作权人','批准日期','所属企业','公司名字']]
+
+    write_csv(Suffix, 'res.csv')
+    for company in company_list[120:]:
         result_list=get_ResultList(company)
         # result_list.insert(0,company)
         # print(result_list[0:10])
