@@ -11,8 +11,6 @@ def SaveFile(fileName,data):
         writer.writerows(data)
 
 
-
-
 if(__name__=='__main__'):
     reader = OpenFile("original_data(1).csv")
     res = list()
