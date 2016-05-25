@@ -33,7 +33,7 @@ if(__name__=='__main__'):
         data = line.decode('gbk').split(',')[9]
         #print(data.find("创始人"))
         if(data.find("创始人")==-1):
-            res.append([i,"No 创始人"])
+            res.append([i,"No Creeater"])   #!!!
             continue
         else:
             if(data.find("◎")!=-1 or data.find("。")!=-1):
@@ -99,7 +99,7 @@ if(__name__=='__main__'):
         line.append("硕士:"+ss)
         line.append("博士:"+bs)
 
-        del(line[1])
+        #del(line[1])
         print(line)
     SaveFile("test.csv",res)
 
