@@ -39,8 +39,8 @@ if(__name__=='__main__'):
                         if(div.find(creater)!=-1): #如果项目负责人是创始人
                             data = ""
                             for div2 in temp:
-                                if(div.find(creater)!=1):
-                                    data+=div
+                                if(div2.find(creater)!=1):
+                                    data+=div2
                             break
 
                 res.append((i,data))
