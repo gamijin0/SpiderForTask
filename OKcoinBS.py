@@ -3,6 +3,7 @@ __author__ = 'RealmL'
 
 import requests
 from bs4 import BeautifulSoup as BS
+import re
 
 # 解决编码问题
 try:
@@ -28,7 +29,7 @@ def  GetHtml( ):
     html=response.text
     return html
 
-def GetIfo(html):
+def GetInfo_bs4(html):
     bs = BS(html,"html.parser")
     data= bs.find_all('div',{'class':'futureMarkBody'})
 
@@ -42,10 +43,19 @@ def GetIfo(html):
     return DayExchangeRate,TwoWeeksAvg
 
 
+def GetInfo_re(html):
+    p1 = re.compile("2016-06-04[\s\S]*?</tr>")
+    res1=p1.findall(html)
+    print(res1[0])
+    p2 = re.compile(">([1-9]*\.[1-9]*)<")
+    res2 =p2.findall(res1[0])
+    return res2
+
 
 
 if __name__ =="__main__":
     html=GetHtml()
     #print(html)
-    print(GetIfo(html))
+    #print(GetInfo_bs4(html))
+    print(GetInfo_re(html))
 
