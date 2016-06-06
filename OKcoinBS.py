@@ -30,11 +30,14 @@ def  GetHtml( ):
 
 def GetIfo(html):
     bs = BS(html,"html.parser")
-    data= bs.find_all('div',{'class':'futureMarketBody'})
-    for tr in data.find_all('tr'):
-        if tr.find('td',{'class':'borderLeft'}).string=='2016-06-04':
-            DayExchangeRate=tr.contents[1]
-            TwoWeeksAvg=tr.contents[2]
+    data= bs.find_all('div',{'class':'futureMarkBody'})
+
+
+    for tr in data[1].find_all('tr'):
+        #print(tr.contents)
+        if '2016-06-04' in str(tr):
+            DayExchangeRate=tr.contents[3].string
+            TwoWeeksAvg=tr.contents[5].string
 
     return DayExchangeRate,TwoWeeksAvg
 
@@ -44,7 +47,5 @@ def GetIfo(html):
 if __name__ =="__main__":
     html=GetHtml()
     #print(html)
-    DayExchangeRate,TwoWeeksAvg=GetIfo(html)
-    print(DayExchangeRate)
-    print(TwoWeeksAvg)
+    print(GetIfo(html))
 
