@@ -114,6 +114,7 @@ class CreditPublicitySystem(object):
             data.clear()
             for a in res_json:
                 tmp_a = annual_report(a['ID'])
+                tmp_a.report_name = a['REPORT_RESULT']
                 self.__get_report(tmp_a)
                 c.annual_report_list.append(tmp_a)
 

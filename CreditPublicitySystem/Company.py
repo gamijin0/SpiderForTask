@@ -2,7 +2,7 @@ __author__ = 'Administrator'
 
 class annual_report:
     id=str()
-    year=str()
+    report_name=str()
     capital_sum =str()
     income_sum = str()
     main_job_sum = str()
@@ -12,23 +12,23 @@ class annual_report:
     net_profit=str()
     debt = str()
 
-    shareholder = str()
-    before_percent=str()
-    after_percent =str()
-    share_change_date = str()
-
-    change_item = str()
-    change_before=str()
-    change_after=str()
-    change_date = str()
-
-    zhaiquanren = str()
-    zhaiwren=str()
-    zhaiquanzhonglei = str()
-    zhaiquanshue =str()
-    zhaiwuqixian = str()
-    baozhengqijian =str()
-    baozhengfangshi=str()
+    # shareholder = str()
+    # before_percent=str()
+    # after_percent =str()
+    # share_change_date = str()
+    #
+    # change_item = str()
+    # change_before=str()
+    # change_after=str()
+    # change_date = str()
+    #
+    # zhaiquanren = str()
+    # zhaiwren=str()
+    # zhaiquanzhonglei = str()
+    # zhaiquanshue =str()
+    # zhaiwuqixian = str()
+    # baozhengqijian =str()
+    # baozhengfangshi=str()
 
 
     def __init__(self,id:str):
