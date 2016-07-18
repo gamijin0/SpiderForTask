@@ -3,7 +3,7 @@ import scrapy
 from scrapy import Request
 import json
 import time
-from ..items import Company
+from ..items import Company,AnnualReport
 import requests
 
 class CompanySpider(scrapy.spiders.Spider):
@@ -14,16 +14,15 @@ class CompanySpider(scrapy.spiders.Spider):
 
     url = 'http://www.jsgsj.gov.cn:58888/province/NoticeServlet.json?QueryExceptionDirectory=true'
 
-
-
-    page_num =1
+    start_page =1
     end_page = 2
 
     def __init__(self,start_page,end_page):
         super()
-        self.page_num = int(start_page)
+        self.start_page = int(start_page)
         self.end_page = int(end_page)
 
+    # 获取每个公司的年报列表
     def GetAnnuanlReportList(self, response):
 
         json_data = json.loads(response.body_as_unicode())['items']
@@ -66,6 +65,7 @@ class CompanySpider(scrapy.spiders.Spider):
                 for a in res_json:
                     com['annual_report_list'].append(str((a['ID'])))
 
+
             #===============================================================
 
             get_annual_report_list(self)
@@ -74,15 +74,45 @@ class CompanySpider(scrapy.spiders.Spider):
             # with open(filename, 'wb') as f:
             #     f.write(response.body)
 
-            yield com
+            # yield com
+            self.StartGetAnnualReport(com=com)
 
-            yield self.start_requests()
-
+    # 开始获取公司列表
     def start_requests(self):
 
-        if(self.page_num>self.end_page):
-            print("抓取结束.")
-            return None
+        for i in range(self.start_page, self.end_page):
+            print("开始抓取第"+str(i)+"页\n")
+            header = {
+                'Host': 'www.jsgsj.gov.cn:58888',
+                'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:47.0) Gecko/20100101 Firefox/47.0',
+                'Accept': 'application/json, text/javascript, */*; q=0.01',
+                'Accept-Language': 'zh-CN,zh;q=0.8,en-US;q=0.5,en;q=0.3',
+                'Accept-Encoding': 'gzip, deflate',
+                'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
+                'X-Requested-With': 'XMLHttpRequest',
+                'Referer': 'http://www.jsgsj.gov.cn:58888/province/notice/QueryExceptionDirectory.jsp',
+                # 'Content-Length': '91',
+                'Connection': 'keep-alive',
+                'Cache-Control': 'max-age=0'
+            }
+
+            data = {
+                'showRecordLine': '1',
+                'corpName': '',
+                'tmp': str(time.strftime('%a+%b+%d+%Y+%H%%3A%M%%3A%S+GMT%%2B0800', time.localtime(time.time()))),
+                'pageNo': str(i),
+                'pageSize': '10'
+            }
+
+
+            MyRequest = scrapy.FormRequest(url=self.url,headers=header,method="POST",formdata=data,callback=self.GetAnnuanlReportList)
+
+            yield MyRequest
+
+
+    # 开始获取某个公司的年报
+    def StartGetAnnualReport(self,com:Company):
+        url = 'http://www.jsgsj.gov.cn:58888/ecipplatform/nbServlet.json?nbEnter=true'
 
         header = {
             'Host': 'www.jsgsj.gov.cn:58888',
@@ -98,17 +128,27 @@ class CompanySpider(scrapy.spiders.Spider):
             'Cache-Control': 'max-age=0'
         }
 
-        data = {
-            'showRecordLine': '1',
-            'corpName': '',
-            'tmp': str(time.strftime('%a+%b+%d+%Y+%H%%3A%M%%3A%S+GMT%%2B0800', time.localtime(time.time()))),
-            'pageNo': str(self.page_num),
-            'pageSize': '10'
-        }
+        #发出多个请求
+        for i in com['annual_report_list']:
+            data = {
+                'ID': i['id'],
+                'OPERATE_TYPE': '2',
+                'showRecordLine': '0',
+                'specificQuery': 'gs_pb',
+                'propertiesName': 'query_basicInfo',
+                'tmp': str(time.strftime('%a+%b+%d+%Y+%H%%3A%M%%3A%S+GMT%%2B0800', time.localtime(time.time())))
+            }
+            yield scrapy.FormRequest(url=url,
+                                     headers=header,
+                                     formdata=data,
+                                     method='POST',
+                                     callback= lambda annual_report=i:self.GetAnnualReport(annual_report))
+
+    # 获取某个公司的年报
+    def GetAnnualReport(self,response,annual_report:AnnualReport):
+        json_data = json.loads(response.body_as_unicode())
+        print("\nJSON:")
+        print(json_data)
+        print("\n")
 
 
-        MyRequest = scrapy.FormRequest(url=self.url,headers=header,method="POST",formdata=data,callback=self.GetAnnuanlReportList)
-
-        self.page_num += 1
-
-        return [MyRequest]

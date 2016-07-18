@@ -14,9 +14,9 @@ class CpsItem(scrapy.Item):
     pass
 
 class Company(scrapy.Item):
-    name= scrapy.Field()
-    reg_no = scrapy.Field()
-    annual_report_list = scrapy.Field()
+    name= scrapy.Field() #str
+    reg_no = scrapy.Field() #str
+    annual_report_list = scrapy.Field() #包含多个AnnualReport的list
 
 class AnnualReport(scrapy.Item):
-    id = scrapy.Field()
+    id = scrapy.Field() #str
