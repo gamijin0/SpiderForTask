@@ -63,7 +63,9 @@ class CompanySpider(scrapy.spiders.Spider):
                 data.clear()
                 com['annual_report_list']=[]
                 for a in res_json:
-                    com['annual_report_list'].append(str((a['ID'])))
+                    aAnnual = AnnualReport()
+                    aAnnual['id'] = a['ID']
+                    com['annual_report_list'].append(aAnnual)
 
 
             #===============================================================
@@ -150,9 +152,18 @@ class CompanySpider(scrapy.spiders.Spider):
     # 获取某个公司的年报
     def GetAnnualReport(self,response):
         # , annual_report:AnnualReport
-        json_data = json.loads(response.body_as_unicode())
-        print("\nJSON:")
-        print(json_data)
-        print("\n")
+        req_data = json.loads(response.body_as_unicode())[0]
+
+        a = AnnualReport()
+        a['capital_sum'] = req_data['NET_AMOUNT']
+        a['income_sum'] = req_data['SALE_INCOME']
+        a['main_job_sum'] = req_data['SERV_FARE_INCOME']
+        a['tax'] = req_data['TAX_TOTAL']
+        a['owner_rights'] = req_data['TOTAL_EQUITY']
+        a['profit_sum'] = req_data['PROFIT_TOTAL']
+        a['net_profit'] = req_data['PROFIT_RETA']
+        a['debt'] = req_data['DEBT_AMOUNT']
+
+        yield a
 
 

@@ -20,3 +20,12 @@ class Company(scrapy.Item):
 
 class AnnualReport(scrapy.Item):
     id = scrapy.Field() #str
+    report_name = scrapy.Field() #str
+    capital_sum = scrapy.Field() #str
+    income_sum = scrapy.Field() #str
+    main_job_sum =scrapy.Field() #str
+    tax = scrapy.Field() #str
+    owner_rights =scrapy.Field() #str
+    profit_sum = scrapy.Field() #str
+    net_profit = scrapy.Field() #str
+    debt =scrapy.Field() #str
