@@ -75,6 +75,7 @@ class CompanySpider(scrapy.spiders.Spider):
             #     f.write(response.body)
 
             # yield com
+            print(com)
             self.StartGetAnnualReport(com=com)
 
     # 开始获取公司列表
@@ -128,7 +129,7 @@ class CompanySpider(scrapy.spiders.Spider):
             'Cache-Control': 'max-age=0'
         }
 
-        #发出多个请求
+        #根据com['annual_report_list']发出多个请求
         for i in com['annual_report_list']:
             data = {
                 'ID': i['id'],
@@ -142,10 +143,13 @@ class CompanySpider(scrapy.spiders.Spider):
                                      headers=header,
                                      formdata=data,
                                      method='POST',
-                                     callback= lambda annual_report=i:self.GetAnnualReport(annual_report))
+                                     # callback= lambda annual_report=i:self.GetAnnualReport(annual_report),
+                                     callback=self.GetAnnualReport()
+                                     )
 
     # 获取某个公司的年报
-    def GetAnnualReport(self,response,annual_report:AnnualReport):
+    def GetAnnualReport(self,response):
+        # , annual_report:AnnualReport
         json_data = json.loads(response.body_as_unicode())
         print("\nJSON:")
         print(json_data)
