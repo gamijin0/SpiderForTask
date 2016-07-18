@@ -78,7 +78,8 @@ class CompanySpider(scrapy.spiders.Spider):
 
             # yield com
             # print(com)
-            self.StartGetAnnualReport(self=self,com=com)
+            print("开始抓取AnnualReport")
+            self.StartGetAnnualReport(com=com)
 
     # 开始获取公司列表
     def start_requests(self):
