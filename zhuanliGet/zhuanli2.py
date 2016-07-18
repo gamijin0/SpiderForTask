@@ -1,7 +1,7 @@
 __author__ = 'Guo'
 # coding: utf-8
 import requests
-from bs4 import BeautifulSoup
+from bs4 import BeautifulSoup,Tag
 import time
 import random
 import re
