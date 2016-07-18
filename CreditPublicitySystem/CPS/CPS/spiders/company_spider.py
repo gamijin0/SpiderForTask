@@ -77,8 +77,8 @@ class CompanySpider(scrapy.spiders.Spider):
             #     f.write(response.body)
 
             # yield com
-            print(com)
-            self.StartGetAnnualReport(com=com)
+            # print(com)
+            self.StartGetAnnualReport(self=self,com=com)
 
     # 开始获取公司列表
     def start_requests(self):
@@ -141,6 +141,9 @@ class CompanySpider(scrapy.spiders.Spider):
                 'propertiesName': 'query_basicInfo',
                 'tmp': str(time.strftime('%a+%b+%d+%Y+%H%%3A%M%%3A%S+GMT%%2B0800', time.localtime(time.time())))
             }
+            print("\n\nData:")
+            print(data)
+            print("\n\n")
             yield scrapy.FormRequest(url=url,
                                      headers=header,
                                      formdata=data,
