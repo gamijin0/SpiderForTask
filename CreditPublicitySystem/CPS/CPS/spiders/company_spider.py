@@ -78,7 +78,6 @@ class CompanySpider(scrapy.spiders.Spider):
 
             # yield com
             # print(com)
-            print("开始抓取AnnualReport")
             self.StartGetAnnualReport(com=com)
 
     # 开始获取公司列表
@@ -116,6 +115,9 @@ class CompanySpider(scrapy.spiders.Spider):
 
     # 开始获取某个公司的年报
     def StartGetAnnualReport(self,com:Company):
+
+        print("开始抓取AnnualReport")
+
         url = 'http://www.jsgsj.gov.cn:58888/ecipplatform/nbServlet.json?nbEnter=true'
 
         header = {
