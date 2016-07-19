@@ -50,7 +50,7 @@ class CpsPipeline(object):
 
         session.add(a_db)
         session.commit()
-        print("已将["+a['id']+"]存入数据库")
+        print("\n已将["+a['id']+"]存入数据库\n")
 
 
         return a

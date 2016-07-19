@@ -78,7 +78,7 @@ class CompanySpider(scrapy.spiders.Spider):
     def start_requests(self):
 
         for i in range(self.start_page, self.end_page):
-            print("开始抓取第"+str(i)+"页\n")
+            print("\n开始抓取第"+str(i)+"页\n")
             header = {
                 'Host': 'www.jsgsj.gov.cn:58888',
                 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:47.0) Gecko/20100101 Firefox/47.0',
@@ -110,7 +110,7 @@ class CompanySpider(scrapy.spiders.Spider):
     # 开始获取某个公司的年报
     def StartGetAnnualReport(self,com:Company):
 
-        print("\n开始为公司%s抓取年报.\n" % com['name'])
+        print("\n开始为[ %s ]抓取年报.\n" % com['name'])
 
         ResList =[]
 
@@ -125,7 +125,6 @@ class CompanySpider(scrapy.spiders.Spider):
             'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
             'X-Requested-With': 'XMLHttpRequest',
             'Referer': 'http://www.jsgsj.gov.cn:58888/province/notice/QueryExceptionDirectory.jsp',
-            # 'Content-Length': '91',
             'Connection': 'keep-alive',
             'Cache-Control': 'max-age=0'
         }
@@ -145,7 +144,6 @@ class CompanySpider(scrapy.spiders.Spider):
                                  headers=header,
                                  formdata=data,
                                  method='POST',
-                                 # callback= lambda annual_report=i:self.GetAnnualReport(annual_report),
                                  callback=self.GetAnnualReport
                                  ))
         return ResList
