@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-
+import json
 # Define your item pipelines here
 #
 # Don't forget to add your pipeline to the ITEM_PIPELINES setting
@@ -8,4 +8,5 @@
 
 class CpsPipeline(object):
     def process_item(self, item, spider):
-        return item
+        line = json.dumps(dict(item), ensure_ascii=False) + "\n"
+        return line
