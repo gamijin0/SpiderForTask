@@ -154,9 +154,7 @@ class CompanySpider(scrapy.spiders.Spider):
     def GetAnnualReport(self,response):
 
         req_data = json.loads(response.body_as_unicode())[0]
-        print("\n\nJSON:\n")
-        print(req_data)
-        print("\n\n")
+
         a = AnnualReport()
         a['id']=str(req_data['ID'])
         a['corp_name'] = str(req_data['CORP_NAME'])

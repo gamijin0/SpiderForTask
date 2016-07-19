@@ -26,9 +26,10 @@ class AnnualReport_db(Base):
     net_profit = Column(String(40))
     debt = Column(String(40))
 
-engine = create_engine('mysql+mysqlconnector://root:password@localhost:3306/test')
+engine = create_engine('mysql+mysqlconnector://root:xlsd1996@chaos.ac.cn:3306/CPS?charset=utf8',echo=True)
 DBSession = sessionmaker(bind=engine)
 session = DBSession()
+Base.metadata.create_all(engine)
 
 class CpsPipeline(object):
     #写入数据库
@@ -49,6 +50,7 @@ class CpsPipeline(object):
 
         session.add(a_db)
         session.commit()
+        print("已将["+a['id']+"]存入数据库")
 
 
         return a
