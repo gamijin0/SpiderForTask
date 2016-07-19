@@ -146,7 +146,7 @@ class CompanySpider(scrapy.spiders.Spider):
                                  formdata=data,
                                  method='POST',
                                  # callback= lambda annual_report=i:self.GetAnnualReport(annual_report),
-                                 callback=lambda aAnnual=i:self.GetAnnualReport(aAnnual)
+                                 callback=lambda a=i:self.GetAnnualReport(a)
                                  ))
         return ResList
 
