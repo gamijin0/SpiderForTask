@@ -146,16 +146,18 @@ class CompanySpider(scrapy.spiders.Spider):
                                  formdata=data,
                                  method='POST',
                                  # callback= lambda annual_report=i:self.GetAnnualReport(annual_report),
-                                 callback=lambda a=i:self.GetAnnualReport(a)
+                                 callback=self.GetAnnualReport
                                  ))
         return ResList
 
     # 获取某个公司的年报
-    def GetAnnualReport(self,response,a:AnnualReport):
+    def GetAnnualReport(self,response):
 
         req_data = json.loads(response.body_as_unicode())[0]
-
-        # a = AnnualReport()
+        print("\n\nJSON:\n")
+        print(req_data)
+        print("\n\n")
+        a = AnnualReport()
         a['capital_sum'] = str(req_data['NET_AMOUNT'])
         a['income_sum'] = str(req_data['SALE_INCOME'])
         a['main_job_sum'] = str(req_data['SERV_FARE_INCOME'])
