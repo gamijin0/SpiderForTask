@@ -19,6 +19,8 @@ class Company(scrapy.Item):
     annual_report_list = scrapy.Field() #包含多个AnnualReport的list
 
 class AnnualReport(scrapy.Item):
+    corp_name =scrapy.Field()#str
+    report_year = scrapy.Field()#int
     id = scrapy.Field() #str
     report_name = scrapy.Field() #str
     capital_sum = scrapy.Field() #str
