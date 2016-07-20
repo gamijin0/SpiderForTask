@@ -61,7 +61,7 @@ class CompanySpider(scrapy.spiders.Spider):
                     'propertiesName': "query_report_list",
                     'tmp': str(time.strftime('%a+%b+%d+%Y+%H%%3A%M%%3A%S+GMT%%2B0800', time.localtime(time.time())))
                 }
-                res_json = requests.post(url, headers=header, data=data).json()
+                res_json = requests.post(url, headers=header, data=data ,timeout=3).json()
                 data.clear()
                 com['annual_report_list']=[]
                 for a in res_json:
