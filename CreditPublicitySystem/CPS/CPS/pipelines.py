@@ -50,8 +50,7 @@ class CpsPipeline(object):
         a_db.debt=a['debt']
 
         try:
-            if(session.query(AnnualReport_db).filter_by(id=a_db.id) is not None):
-
+            if(session.query(AnnualReport_db).filter_by(id=a_db.id) is None):
                 session.add(a_db)
                 time.sleep(0.5)
                 session.commit()
