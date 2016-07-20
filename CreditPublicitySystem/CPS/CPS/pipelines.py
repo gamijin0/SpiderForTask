@@ -49,9 +49,14 @@ class CpsPipeline(object):
         a_db.net_profit=a['net_profit']
         a_db.debt=a['debt']
 
-        session.add(a_db)
-        time.sleep(0.5)
-        session.commit()
+        try:
+            if(session.query(AnnualReport_db).filter_by(id=a_db.id) is not None):
+                session.add(a_db)
+                time.sleep(0.5)
+                session.commit()
+        except Exception as e:
+            print(e)
+
         print("\n已将["+a['id']+"]存入数据库\n")
 
 
