@@ -50,14 +50,16 @@ class CpsPipeline(object):
         a_db.debt=a['debt']
 
         try:
-            if(session.query(AnnualReport_db).filter_by(id=a_db.id) is None):
-                session.add(a_db)
-                time.sleep(0.5)
-                session.commit()
-                print("\n已将[" + a['id'] + "]存入数据库\n")
-            else:
-                print("\n\t数据库已存在[%s]" % str(a_db.id))
+            session.query(AnnualReport_db).filter_by(id=a_db.id).one()
+            #若无异常,则说明数据库中已存在此对象
+            print("\n\t数据库已存在[%s]" % str(a_db.id))
+
         except Exception as e:
-            print(e)
+            session.add(a_db)
+            time.sleep(0.5)
+            session.commit()
+            print("\n已将[" + a['id'] + "]存入数据库\n")
 
         return a
+
+
