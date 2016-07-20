@@ -25,3 +25,7 @@ class ProxyMiddleware(object):
     else:
       print ("**************ProxyMiddleware no pass************" + proxy['ip_port'])
       request.meta['proxy'] = "http://%s" % proxy['ip_port']
+
+class TimeOutMiddleware(object):
+  def process_request(self,request,spider):
+    request.meta['download_timeout'] = 10

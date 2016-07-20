@@ -17,6 +17,8 @@ class CompanySpider(scrapy.spiders.Spider):
     start_page =1
     end_page = 2
 
+
+
     def __init__(self,start_page,end_page):
         super()
         self.start_page = int(start_page)
