@@ -51,9 +51,12 @@ class CpsPipeline(object):
 
         try:
             if(session.query(AnnualReport_db).filter_by(id=a_db.id) is not None):
+
                 session.add(a_db)
                 time.sleep(0.5)
                 session.commit()
+            else:
+                print("\n\t数据库已存在[%s]" % str(a_db.id))
         except Exception as e:
             print(e)
 
