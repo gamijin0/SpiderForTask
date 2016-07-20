@@ -54,12 +54,10 @@ class CpsPipeline(object):
                 session.add(a_db)
                 time.sleep(0.5)
                 session.commit()
+                print("\n已将[" + a['id'] + "]存入数据库\n")
             else:
                 print("\n\t数据库已存在[%s]" % str(a_db.id))
         except Exception as e:
             print(e)
-
-        print("\n已将["+a['id']+"]存入数据库\n")
-
 
         return a
