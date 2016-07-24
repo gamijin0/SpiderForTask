@@ -130,10 +130,21 @@ class CreditPublicitySystem(object):
 
 
 if __name__ == '__main__':
-    cps = CreditPublicitySystem()
-    cps.get_company_list(1)
-    cps.get_annual_report()
-    cps.Print_List()
+    from CreditPublicitySystem.CPS.CPS.pipelines import AnnualReport_db
+    from sqlalchemy import Column, String, create_engine, Integer
+    from sqlalchemy.orm import sessionmaker
+    from sqlalchemy.ext.declarative import declarative_base
+    engine = create_engine('mysql+mysqlconnector://root:xlsd1996@chaos.ac.cn:3306/CPS?charset=utf8')
+    DBSession = sessionmaker(bind=engine)
+    session = DBSession()
+
+    res = session.query(AnnualReport_db).filter_by(id="1004699887").one()
+    print(res.id,res.corp_name)
+    session.close()
+    # cps = CreditPublicitySystem()
+    # cps.get_company_list(1)
+    # cps.get_annual_report()
+    # cps.Print_List()
 
     # print(company_list)
     # for company in company_list:

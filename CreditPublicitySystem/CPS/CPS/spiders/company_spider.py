@@ -17,6 +17,8 @@ class CompanySpider(scrapy.spiders.Spider):
     start_page =1
     end_page = 2
 
+
+
     def __init__(self,start_page,end_page):
         super()
         self.start_page = int(start_page)
@@ -59,7 +61,15 @@ class CompanySpider(scrapy.spiders.Spider):
                     'propertiesName': "query_report_list",
                     'tmp': str(time.strftime('%a+%b+%d+%Y+%H%%3A%M%%3A%S+GMT%%2B0800', time.localtime(time.time())))
                 }
-                res_json = requests.post(url, headers=header, data=data).json()
+
+                from requests.adapters import HTTPAdapter
+                s = requests.session()
+                s.mount('http://', HTTPAdapter(max_retries=3))
+
+                res_json = s.post(url, headers=header, data=data ,timeout=5).json()
+
+                # res_json = requests.post(url, headers=header, data=data ,timeout=3).json()
+
                 data.clear()
                 com['annual_report_list']=[]
                 for a in res_json:
