@@ -36,30 +36,42 @@ class CpsPipeline(object):
     #写入数据库
     def process_item(self, a:AnnualReport, spider):
 
-        a_db = AnnualReport_db()
-        a_db.id=a['id']
-        a_db.corp_name=a['corp_name']
-        a_db.report_year=a['report_year']
-        a_db.capital_sum=a['capital_sum']
-        a_db.income_sum=a['income_sum']
-        a_db.main_job_sum=a['main_job_sum']
-        a_db.tax=a['tax']
-        a_db.owner_rights=a['owner_rights']
-        a_db.profit_sum=a['profit_sum']
-        a_db.net_profit=a['net_profit']
-        a_db.debt=a['debt']
+        if (spider.name!="AnnualReport"):
 
-        try:
-            session.query(AnnualReport_db).filter_by(id=a_db.id).one()
-            #若无异常,则说明数据库中已存在此对象
-            print("\n\t数据库已存在[%s]" % str(a_db.id))
+            a_db = AnnualReport_db()
+            a_db.id=a['id']
+            a_db.corp_name=a['corp_name']
+            a_db.report_year=a['report_year']
+            a_db.capital_sum=a['capital_sum']
+            a_db.income_sum=a['income_sum']
+            a_db.main_job_sum=a['main_job_sum']
+            a_db.tax=a['tax']
+            a_db.owner_rights=a['owner_rights']
+            a_db.profit_sum=a['profit_sum']
+            a_db.net_profit=a['net_profit']
+            a_db.debt=a['debt']
 
-        except Exception as e:
-            session.add(a_db)
-            time.sleep(0.5)
+            try:
+                session.query(AnnualReport_db).filter_by(id=a_db.id).one()
+                #若无异常,则说明数据库中已存在此对象
+                print("\n\t数据库已存在[%s]" % str(a_db.id))
+
+            except Exception as e:
+                session.add(a_db)
+                time.sleep(0.5)
+                session.commit()
+                print("\n已将[" + a['id'] + "]存入数据库\n")
+
+            return a
+        else:
+            a_db=session.query(AnnualReport_db).filter(id=a['id']).one()
+
+
+            a_db.XXXX=a['XXXXX']
+            a_db.XXXX=a['XXXXX']
+            a_db.XXXX=a['XXXXX']
+
+            session.merge(a_db)
             session.commit()
-            print("\n已将[" + a['id'] + "]存入数据库\n")
-
-        return a
 
 
