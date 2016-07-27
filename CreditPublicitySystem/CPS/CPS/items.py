@@ -31,3 +31,8 @@ class AnnualReport(scrapy.Item):
     profit_sum = scrapy.Field() #str
     net_profit = scrapy.Field() #str
     debt =scrapy.Field() #str
+
+    stock_name=scrapy.Field() #str
+    change_before=scrapy.Field() #str
+    change_after=scrapy.Field() #str
+    stockright_change_date=scrapy.Field() #str

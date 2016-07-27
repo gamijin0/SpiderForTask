@@ -4,7 +4,7 @@ from scrapy import Request
 import json
 import time
 from ..items import Company,AnnualReport
-import requests
+
 
 class CompanySpider(scrapy.spiders.Spider):
 

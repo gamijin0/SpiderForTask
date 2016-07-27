@@ -58,11 +58,13 @@ class AnnualSpider(scrapy.Spider):
         for Id in annual_report_ids[int(self.start):int(self.end)]:
             data = {
                 'ID': str(Id),
-                'OPERATE_TYPE': '2',
-                'showRecordLine': '0',
+                # 'OPERATE_TYPE': '2',
+                'showRecordLine': '1',
                 'specificQuery': 'gs_pb',
-                'propertiesName': 'query_basicInfo',
+                'propertiesName': 'query_EquityTransfer',
                 'tmp': str(time.strftime('%a+%b+%d+%Y+%H%%3A%M%%3A%S+GMT%%2B0800', time.localtime(time.time())))
+                'pageNo':"1",
+                'pageSize':"5"
             }
 
 
@@ -72,7 +74,7 @@ class AnnualSpider(scrapy.Spider):
                     headers=header,
                     formdata=data,
                     method='POST',
-                    callback=self.GetAnnualReport,
+                    callback=self.GetAnnualReport,#回调函数
                 )
             )
 
@@ -85,25 +87,26 @@ class AnnualSpider(scrapy.Spider):
     def GetAnnualReport(self,response):
         req_data = json.loads(response.body_as_unicode())[0]
 
-        a = AnnualReport()
+        a = AnnualReport() #+++
         try:
-            a['id'] = str(req_data['ID'])
-            a['corp_name'] = str(req_data['CORP_NAME'])
-            a['report_year'] = str(req_data['REPORT_YEAR'])
-            a['capital_sum'] = str(req_data['NET_AMOUNT'])
-            a['income_sum'] = str(req_data['SALE_INCOME'])
-            a['main_job_sum'] = str(req_data['SERV_FARE_INCOME'])
-            a['tax'] = str(req_data['TAX_TOTAL'])
-            a['owner_rights'] = str(req_data['TOTAL_EQUITY'])
-            a['profit_sum'] = str(req_data['PROFIT_TOTAL'])
-            a['net_profit'] = str(req_data['PROFIT_RETA'])
-            a['debt'] = str(req_data['DEBT_AMOUNT'])
+
+            # a['corp_name'] = str(req_data['CORP_NAME'])
+            # a['report_year'] = str(req_data['REPORT_YEAR'])
+            # a['capital_sum'] = str(req_data['NET_AMOUNT'])
+            # a['income_sum'] = str(req_data['SALE_INCOME'])
+            # a['main_job_sum'] = str(req_data['SERV_FARE_INCOME'])
+            # a['tax'] = str(req_data['TAX_TOTAL'])
+            # a['owner_rights'] = str(req_data['TOTAL_EQUITY'])
+            # a['profit_sum'] = str(req_data['PROFIT_TOTAL'])
+            # a['net_profit'] = str(req_data['PROFIT_RETA'])
+            # a['debt'] = str(req_data['DEBT_AMOUNT'])
 
             #stock
+            a['id'] = str(req_data['ID'])
             a['stock_name'] = str(req_data['STOCK_NAME'])
             a['change_before'] = str(req_data['CHANGE_BEFORE'])
             a['change_after'] = str(req_data['CHANGE_AFTER'])
-            a['change_date'] = str(req_data['CHANGE_DATE'])
+            a['stockright_change_date'] = str(req_data['CHANGE_DATE'])
             print("\nFIND one:")
             yield a
             print("\n")
