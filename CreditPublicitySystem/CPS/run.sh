@@ -1,5 +1,5 @@
 #########################################################################
 # File Name: run.sh
 # Author: test
-scrapy crawl Companys -a start_page=400 -a end_page=405
+scrapy crawl AnnualReport -a start=5000 -a end=10000 -o AnnualReport.json
 

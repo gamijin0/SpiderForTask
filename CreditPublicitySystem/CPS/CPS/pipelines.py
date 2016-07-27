@@ -64,14 +64,15 @@ class CpsPipeline(object):
 
             return a
         else:
-            a_db=session.query(AnnualReport_db).filter(id=a['id']).one()
-
-
-            a_db.XXXX=a['XXXXX']
-            a_db.XXXX=a['XXXXX']
-            a_db.XXXX=a['XXXXX']
-
-            session.merge(a_db)
-            session.commit()
+            return a
+            # a_db=session.query(AnnualReport_db).filter(id=a['id']).one()
+            #
+            #
+            # a_db.XXXX=a['XXXXX']
+            # a_db.XXXX=a['XXXXX']
+            # a_db.XXXX=a['XXXXX']
+            #
+            # session.merge(a_db)
+            # session.commit()
 
 
