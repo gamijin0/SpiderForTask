@@ -32,7 +32,7 @@ class AnnualSpider(scrapy.Spider):
             'Accept-Encoding': 'gzip, deflate',
             'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
             'X-Requested-With': 'XMLHttpRequest',
-            'Referer': 'http://www.jsgsj.gov.cn:58888/province/notice/QueryExceptionDirectory.jsp',
+            'Referer': 'http://www.jsgsj.gov.cn:58888/ecipplatform/reportCheck/company/cPublic.jsp',
             'Connection': 'keep-alive',
             'Cache-Control': 'max-age=0'
         }
@@ -58,11 +58,10 @@ class AnnualSpider(scrapy.Spider):
         for Id in annual_report_ids[int(self.start):int(self.end)]:
             data = {
                 'ID': str(Id),
-                # 'OPERATE_TYPE': '2',
                 'showRecordLine': '1',
                 'specificQuery': 'gs_pb',
                 'propertiesName': 'query_EquityTransfer',
-                'tmp': str(time.strftime('%a+%b+%d+%Y+%H%%3A%M%%3A%S+GMT%%2B0800', time.localtime(time.time())))
+                'tmp': str(time.strftime('%a+%b+%d+%Y+%H%%3A%M%%3A%S+GMT%%2B0800', time.localtime(time.time()))),
                 'pageNo':"1",
                 'pageSize':"5"
             }

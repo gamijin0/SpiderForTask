@@ -52,10 +52,10 @@ CONCURRENT_REQUESTS = 50
 
 # Enable or disable downloader middlewares
 # See http://scrapy.readthedocs.org/en/latest/topics/downloader-middleware.html
-DOWNLOADER_MIDDLEWARES = {
-    'scrapy.contrib.downloadermiddleware.downloadtimeout.DownloadTimeoutMiddleware': 543,
-    'CPS.middlewares.TimeOutMiddleware':542,
-}
+# DOWNLOADER_MIDDLEWARES = {
+#     'scrapy.contrib.downloadermiddleware.downloadtimeout.DownloadTimeoutMiddleware': 543,
+#     'CPS.middlewares.TimeOutMiddleware':542,
+# }
 
 # Enable or disable extensions
 # See http://scrapy.readthedocs.org/en/latest/topics/extensions.html
